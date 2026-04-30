@@ -1,55 +1,85 @@
 import models.*;
+import storage.FileManager;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        // 1) Create a company
-        Company c = new Company(
+        FileManager fileManager = new FileManager();
+
+        List<Company> companies = new ArrayList<>();
+        List<InternshipOffer> offers = new ArrayList<>();
+        List<Student> students = new ArrayList<>();
+        List<Application> applications = new ArrayList<>();
+
+        Company company = new Company(
                 1,
                 "TechCorp",
                 "Algiers",
                 "contact@techcorp.com",
-                "0550 00 00 00",
+                "0550000000",
                 "IT"
         );
 
-        // 2) Create an internship offer
         InternshipOffer offer = new InternshipOffer(
                 10,
                 "Java Developer Intern",
-                "Work on backend systems",
+                "Backend internship",
                 "Software Development",
                 "Algiers",
-                "Java, OOP, Git",
+                "Java OOP Git",
                 12,
                 0.0,
                 LocalDate.of(2026, 6, 1),
-                c
+                company
         );
 
-        // 3) Create a student
-        Student s = new Student(
+        Student student = new Student(
                 100,
-                "Khadidja",
-                "khadidja@example.com",
+                "Maya",
+                "maya@example.com",
                 "1234",
-                "0551 11 11 11",
+                "0550000000",
                 2020123456,
                 "Computer Science",
                 3,
-                "UNI123"
+                "UNI001"
         );
 
-        // 4) Create an application
-        Application app = new Application(500, s, offer);
+        Application application = new Application(
+                500,
+                student,
+                offer
+        );
 
-        // 5) Print everything to check
-        System.out.println("=== TEST MODELS ===");
-        System.out.println("Company: " + c.getName());
-        System.out.println("Offer: " + offer.getTitle());
-        System.out.println("Student: " + s.getFullName());
-        System.out.println("Application Status: " + app.getStatus());
-        System.out.println("Application Date: " + app.getDateApplied());
+        companies.add(company);
+        offers.add(offer);
+        students.add(student);
+        applications.add(application);
+
+        fileManager.saveCompanies(companies);
+        fileManager.saveOffers(offers);
+        fileManager.saveStudents(students);
+        fileManager.saveApplications(applications);
+
+        List<Company> loadedCompanies = fileManager.loadCompanies();
+        List<InternshipOffer> loadedOffers = fileManager.loadOffers(loadedCompanies);
+        List<Student> loadedStudents = fileManager.loadStudents();
+        List<Application> loadedApplications = fileManager.loadApplications(loadedStudents, loadedOffers);
+
+        System.out.println("===== FINAL PROFESSIONAL STORAGE TEST =====");
+
+        for (Application app : loadedApplications) {
+            System.out.println(
+                    "Application ID: " + app.getId()
+                            + " | Student: " + app.getStudent().getFullName()
+                            + " | Offer: " + app.getOffer().getTitle()
+                            + " | Company: " + app.getOffer().getCompany().getName()
+                            + " | Status: " + app.getStatus()
+            );
+        }
     }
 }
