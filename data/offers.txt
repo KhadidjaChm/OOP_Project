@@ -1,1 +1,0 @@
-10,Java Developer Intern,Backend internship,Software Development,Algiers,Java OOP Git,0,0.0,2026-06-01,true,1

@@ -1,1 +1,0 @@
-100,Maya,maya@example.com,1234,0550000000,2020123456,Computer Science,3,UNI001
