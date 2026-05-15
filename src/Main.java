@@ -1,55 +1,44 @@
-import models.*;
-import java.time.LocalDate;
+import logic.RegistrationService;
+import models.Company;
+import models.Student;
+import models.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
 
-        // 1) Create a company
-        Company c = new Company(
+        List<User> users = new ArrayList<>();
+        List<Company> companies = new ArrayList<>();
+
+        RegistrationService registrationService = new RegistrationService();
+
+        Student student = registrationService.registerStudent(
+                users,
+                1,
+                "Aya",
+                "aya@mail.com",
+                "1234",
+                "0555111111",
+                2024001,
+                "Cybersecurity",
+                2,
+                "UNI001"
+        );
+
+        Company company = registrationService.registerCompany(
+                companies,
                 1,
                 "TechCorp",
                 "Algiers",
-                "contact@techcorp.com",
-                "0550 00 00 00",
+                "tech@corp.com",
+                "0555000000",
                 "IT"
         );
 
-        // 2) Create an internship offer
-        InternshipOffer offer = new InternshipOffer(
-                10,
-                "Java Developer Intern",
-                "Work on backend systems",
-                "Software Development",
-                "Algiers",
-                "Java, OOP, Git",
-                12,
-                0.0,
-                LocalDate.of(2026, 6, 1),
-                c
-        );
-
-        // 3) Create a student
-        Student s = new Student(
-                100,
-                "Khadidja",
-                "khadidja@example.com",
-                "1234",
-                "0551 11 11 11",
-                2020123456,
-                "Computer Science",
-                3,
-                "UNI123"
-        );
-
-        // 4) Create an application
-        Application app = new Application(500, s, offer);
-
-        // 5) Print everything to check
-        System.out.println("=== TEST MODELS ===");
-        System.out.println("Company: " + c.getName());
-        System.out.println("Offer: " + offer.getTitle());
-        System.out.println("Student: " + s.getFullName());
-        System.out.println("Application Status: " + app.getStatus());
-        System.out.println("Application Date: " + app.getDateApplied());
+        System.out.println(student.getFullName());
+        System.out.println(company.getName());
     }
 }
