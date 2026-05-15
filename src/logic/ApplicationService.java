@@ -16,7 +16,6 @@ import java.util.List;
 
 public class ApplicationService {
 
-
     private static int nextApplicationId = 1;
 
     // Student applies to an internship offer
@@ -25,8 +24,16 @@ public class ApplicationService {
             throw new IllegalArgumentException("Student and offer must not be null.");
         }
 
+        if (student.getApplications() == null) {
+            student.setApplications(new ArrayList<>());
+        }
+
         if (student.isBlocked()) {
             throw new UnauthorizedActionException("Blocked student cannot apply to internship offers.");
+        }
+
+        if (!offer.isActive()) {
+            throw new UnauthorizedActionException("Cannot apply to an inactive offer.");
         }
 
         if (offer.getDeadline() != null && LocalDate.now().isAfter(offer.getDeadline())) {
@@ -52,12 +59,12 @@ public class ApplicationService {
     }
 
     // Student cancels an application
-    public void cancelApplication(Student student, Application application) {
+    public void cancel(Student student, Application application) {
         if (student == null || application == null) {
             throw new IllegalArgumentException("Student and application must not be null.");
         }
 
-        if (application.getStudent() != student) {
+        if (application.getStudent() == null || application.getStudent().getId() != student.getId()) {
             throw new UnauthorizedActionException("Student is not allowed to cancel this application.");
         }
 
@@ -67,19 +74,23 @@ public class ApplicationService {
             );
         }
 
-        student.getApplications().remove(application);
+        if (student.getApplications() != null) {
+            student.getApplications().remove(application);
+        }
     }
 
-    // Return all applications of one student
     public List<Application> getApplicationsByStudent(Student student) {
         if (student == null) {
             throw new IllegalArgumentException("Student must not be null.");
         }
 
+        if (student.getApplications() == null) {
+            return new ArrayList<>();
+        }
+
         return new ArrayList<>(student.getApplications());
     }
 
-    // Check if student already applied to this specific offer
     private boolean hasAlreadyAppliedToOffer(Student student, InternshipOffer offer) {
         for (Application application : student.getApplications()) {
             if (application.getOffer() != null && application.getOffer().getId() == offer.getId()) {
@@ -89,10 +100,13 @@ public class ApplicationService {
         return false;
     }
 
-    // Check if student already has final acceptance from a company
     public boolean hasAcceptedCompanyApplication(Student student) {
         if (student == null) {
             throw new IllegalArgumentException("Student must not be null.");
+        }
+
+        if (student.getApplications() == null) {
+            return false;
         }
 
         for (Application application : student.getApplications()) {
@@ -100,6 +114,12 @@ public class ApplicationService {
                 return true;
             }
         }
+
         return false;
+    }
+
+    // Useful later when loading applications from file storage
+    public static void setNextApplicationId(int nextId) {
+        nextApplicationId = nextId;
     }
 }

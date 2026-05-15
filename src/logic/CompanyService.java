@@ -12,6 +12,7 @@ public class CompanyService {
 
     // Company accepts the student after admin pre-acceptance
     public void companyAccept(Company company, Application application) {
+
         if (company == null || application == null) {
             throw new IllegalArgumentException("Company and application must not be null.");
         }
@@ -33,11 +34,17 @@ public class CompanyService {
         }
 
         application.setStatus(Status.ACCEPTED_COMPANY);
+
+        // Clear old rejection information if any
+        application.setRejectType(null);
+        application.setRejectReason(null);
+
         application.setDateFinalDecision(LocalDate.now());
     }
 
     // Company rejects the student after admin pre-acceptance
     public void companyReject(Company company, Application application, String reason) {
+
         if (company == null || application == null) {
             throw new IllegalArgumentException("Company and application must not be null.");
         }

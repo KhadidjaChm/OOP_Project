@@ -9,6 +9,7 @@ public class OfferSearchService {
 
     // Search offers by keyword in title, description, or domain
     public List<InternshipOffer> searchByKeyword(List<InternshipOffer> offers, String keyword) {
+
         if (offers == null) {
             throw new IllegalArgumentException("Offers list must not be null.");
         }
@@ -21,12 +22,19 @@ public class OfferSearchService {
         String lowerKeyword = keyword.toLowerCase();
 
         for (InternshipOffer offer : offers) {
-            if (offer.isActive()
-                    && (
-                    offer.getTitle().toLowerCase().contains(lowerKeyword)
-                            || offer.getDescription().toLowerCase().contains(lowerKeyword)
-                            || offer.getDomain().toLowerCase().contains(lowerKeyword)
-            )) {
+
+            if (offer == null || !offer.isActive()) {
+                continue;
+            }
+
+            String title = offer.getTitle() != null ? offer.getTitle().toLowerCase() : "";
+            String description = offer.getDescription() != null ? offer.getDescription().toLowerCase() : "";
+            String domain = offer.getDomain() != null ? offer.getDomain().toLowerCase() : "";
+
+            if (title.contains(lowerKeyword)
+                    || description.contains(lowerKeyword)
+                    || domain.contains(lowerKeyword)) {
+
                 result.add(offer);
             }
         }
@@ -36,6 +44,7 @@ public class OfferSearchService {
 
     // Filter offers by company name
     public List<InternshipOffer> filterByCompany(List<InternshipOffer> offers, String companyName) {
+
         if (offers == null) {
             throw new IllegalArgumentException("Offers list must not be null.");
         }
@@ -48,10 +57,18 @@ public class OfferSearchService {
         String lowerCompanyName = companyName.toLowerCase();
 
         for (InternshipOffer offer : offers) {
-            if (offer.isActive()
-                    && offer.getCompany() != null
-                    && offer.getCompany().getName().toLowerCase().contains(lowerCompanyName)) {
-                result.add(offer);
+
+            if (offer == null || !offer.isActive()) {
+                continue;
+            }
+
+            if (offer.getCompany() != null && offer.getCompany().getName() != null) {
+
+                String company = offer.getCompany().getName().toLowerCase();
+
+                if (company.contains(lowerCompanyName)) {
+                    result.add(offer);
+                }
             }
         }
 
@@ -60,6 +77,7 @@ public class OfferSearchService {
 
     // Filter offers by domain
     public List<InternshipOffer> filterByDomain(List<InternshipOffer> offers, String domain) {
+
         if (offers == null) {
             throw new IllegalArgumentException("Offers list must not be null.");
         }
@@ -72,8 +90,16 @@ public class OfferSearchService {
         String lowerDomain = domain.toLowerCase();
 
         for (InternshipOffer offer : offers) {
-            if (offer.isActive()
-                    && offer.getDomain().toLowerCase().contains(lowerDomain)) {
+
+            if (offer == null || !offer.isActive()) {
+                continue;
+            }
+
+            String offerDomain = offer.getDomain() != null
+                    ? offer.getDomain().toLowerCase()
+                    : "";
+
+            if (offerDomain.contains(lowerDomain)) {
                 result.add(offer);
             }
         }
@@ -83,6 +109,7 @@ public class OfferSearchService {
 
     // Filter offers by location
     public List<InternshipOffer> filterByLocation(List<InternshipOffer> offers, String location) {
+
         if (offers == null) {
             throw new IllegalArgumentException("Offers list must not be null.");
         }
@@ -95,8 +122,16 @@ public class OfferSearchService {
         String lowerLocation = location.toLowerCase();
 
         for (InternshipOffer offer : offers) {
-            if (offer.isActive()
-                    && offer.getLocation().toLowerCase().contains(lowerLocation)) {
+
+            if (offer == null || !offer.isActive()) {
+                continue;
+            }
+
+            String offerLocation = offer.getLocation() != null
+                    ? offer.getLocation().toLowerCase()
+                    : "";
+
+            if (offerLocation.contains(lowerLocation)) {
                 result.add(offer);
             }
         }
