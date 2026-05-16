@@ -1,0 +1,4 @@
+1;Aya;aya@mail.com;1234;0555111111;2024001;Cybersecurity;2;UNI001;false
+2;Sara;sara@mail.com;1234;0555222222;2024002;AI;2;UNI002;false
+3;Lina;lina@mail.com;1234;0555333333;2024003;Software Engineering;3;UNI003;false
+4;Max Student;max@mail.com;1234;0555444444;2024004;IT;2;UNI004;false
