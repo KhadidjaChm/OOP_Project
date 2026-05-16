@@ -1,67 +1,93 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import models.InternshipOffer;
+import models.Student;
+import services.ApplicationService;
+import services.InternshipService;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
 
 public class StudentDashboard extends JFrame {
 
-    public StudentDashboard() {
+    private final Student student;
+    private final InternshipService internshipService;
+    private final ApplicationService applicationService;
+
+    public StudentDashboard(Student student,
+                            InternshipService internshipService,
+                            ApplicationService applicationService) {
+
+        this.student = student;
+        this.internshipService = internshipService;
+        this.applicationService = applicationService;
 
         // UI Theme
         FlatLightLaf.setup();
 
         setTitle("Student Dashboard");
-        setSize(600, 400);
+        setSize(800, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         // ===== HEADER =====
-        JLabel title = new JLabel("Welcome, Student!", SwingConstants.CENTER);
-        title.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        title.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
-        add(title, BorderLayout.NORTH);
+        JLabel header = new JLabel("Welcome, " + student.getFirstName() + "!", SwingConstants.CENTER);
+        header.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        header.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+        add(header, BorderLayout.NORTH);
 
-        // ===== CENTER PANEL =====
-        JPanel center = new JPanel();
-        center.setLayout(new GridLayout(3, 1, 15, 15));
-        center.setBorder(BorderFactory.createEmptyBorder(20, 80, 20, 80));
+        // ===== TABLE OF OFFERS =====
+        String[] columns = {"Title", "Company", "Domain", "Location", "Duration", "Deadline"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
 
-        JButton viewOffersBtn = new JButton("View Internship Offers");
-        viewOffersBtn.setBackground(new Color(0, 120, 215));
-        viewOffersBtn.setForeground(Color.WHITE);
-        viewOffersBtn.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        JTable table = new JTable(model);
+        table.setRowHeight(28);
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
 
-        JButton viewStatusBtn = new JButton("View Application Status");
-        viewStatusBtn.setBackground(new Color(0, 150, 136));
-        viewStatusBtn.setForeground(Color.WHITE);
-        viewStatusBtn.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane, BorderLayout.CENTER);
 
-        JButton logoutBtn = new JButton("Logout");
-        logoutBtn.setBackground(new Color(200, 60, 60));
-        logoutBtn.setForeground(Color.WHITE);
-        logoutBtn.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        // Load offers from service
+        List<InternshipOffer> offers = internshipService.getAllOffers();
+        for (InternshipOffer offer : offers) {
+            model.addRow(new Object[]{
+                    offer.getTitle(),
+                    offer.getCompany().getName(),
+                    offer.getDomain(),
+                    offer.getLocation(),
+                    offer.getDuration() + " months",
+                    offer.getDeadline()
+            });
+        }
 
-        center.add(viewOffersBtn);
-        center.add(viewStatusBtn);
-        center.add(logoutBtn);
+        // ===== APPLY BUTTON =====
+        JButton applyBtn = new JButton("Apply to Selected Offer");
+        applyBtn.setBackground(new Color(0, 120, 215));
+        applyBtn.setForeground(Color.WHITE);
+        applyBtn.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        applyBtn.setFocusPainted(false);
 
-        add(center, BorderLayout.CENTER);
+        JPanel btnPanel = new JPanel();
+        btnPanel.add(applyBtn);
+        add(btnPanel, BorderLayout.SOUTH);
 
-        // ===== ACTIONS =====
-        viewOffersBtn.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Offers page coming soon!");
-        });
+        // ===== ACTION: APPLY TO OFFER =====
+        applyBtn.addActionListener(e -> {
+            int selectedRow = table.getSelectedRow();
 
-        viewStatusBtn.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Application status coming soon!");
-        });
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Please select an offer first.");
+                return;
+            }
 
-        logoutBtn.addActionListener(e -> {
-            new MainWindow().setVisible(true);
-            dispose();
+            InternshipOffer selectedOffer = offers.get(selectedRow);
+
+            new ApplyToOfferWindow(student, selectedOffer, applicationService).setVisible(true);
         });
     }
 }
-

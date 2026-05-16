@@ -5,13 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8319b2ff-4808-4e02-bb6d-61a5791e233f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/gui/AdminValidationWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/ApplyToOfferWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/CompanyRegistrationWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/CreateOfferWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/ManageOffersWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/StudentRegistrationWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gui/ViewApplicantsWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/AdminDashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/AdminDashboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/CompanyDashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/CompanyDashboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/StudentAuthWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/StudentAuthWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/StudentDashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/StudentDashboard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -27,14 +44,21 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "onboarding.tips.debug.path": "C:/Users/Pc/Desktop/Project_OOP/OOP_Project/src/Main.java",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -48,6 +72,9 @@
       <workItem from="1775903045449" duration="10000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
