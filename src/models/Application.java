@@ -88,4 +88,7 @@ public class Application {
     public void setDateFinalDecision(LocalDate dateFinalDecision) {
         this.dateFinalDecision = dateFinalDecision;
     }
+    public void setDateApplied(LocalDate dateApplied) {
+        this.dateApplied = dateApplied;
+    }
 }
