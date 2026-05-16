@@ -1,0 +1,10 @@
+1;Backend Internship;Java OOP internship;Software Development;Algiers;Java, OOP;0;20000.0;2026-05-31;true;1
+2;Security Analyst Internship;Security review internship;Cybersecurity;Oran;Networking, Security;0;25000.0;2026-06-05;true;2
+3;AI Internship;Machine learning project;Artificial Intelligence;Algiers;Python, ML;0;30000.0;2026-06-10;true;1
+4;Expired Offer;Old internship;IT;Algiers;Java;0;10000.0;2026-05-15;true;1
+5;Offer 0;Test offer 0;IT;Algiers;Java;0;10000.0;2026-05-26;true;1
+6;Offer 1;Test offer 1;IT;Algiers;Java;0;10000.0;2026-05-26;true;1
+7;Offer 2;Test offer 2;IT;Algiers;Java;0;10000.0;2026-05-26;true;1
+8;Offer 3;Test offer 3;IT;Algiers;Java;0;10000.0;2026-05-26;true;1
+9;Offer 4;Test offer 4;IT;Algiers;Java;0;10000.0;2026-05-26;true;1
+10;Offer 5;Test offer 5;IT;Algiers;Java;0;10000.0;2026-05-26;true;1
