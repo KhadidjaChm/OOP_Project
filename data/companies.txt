@@ -1,1 +1,2 @@
 1;TechCorp;Algiers;tech@corp.com;0555000000;IT
+2;CyberDZ;Oran;cyber@dz.com;0555666666;Cybersecurity
